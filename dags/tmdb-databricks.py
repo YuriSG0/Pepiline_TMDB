@@ -29,5 +29,40 @@ def dag_tmdb():
 
             return response.status_code
         
-        authentication_TMDB()
+        auth = authentication_TMDB()
+
+    with TaskGroup('Get-Data-Film') as get_information:
+        @task(TriggerRule=ONE_SUCESS)
+        def requests_genres():
+            url = Variable.get('url-genres')
+            token = Variable.get('token')
+
+            header = {
+            'Authorization' : token
+            }
+
+            response = requests.get(url,headers=header)
+            return response.json()
+        
+        genres_data = requests_genres()
+        
+        @task
+        def request_film():
+            url = Variable.get('url-movie')
+            token =  Variable.get('token')
+
+            header = {
+                'Authorization' : token
+            }
+
+            response = requests.get(url,headers=header)
+            return response.json()
+
+        film_data = request_film()
+
+    authetification >> get_information
+
+            
+                
+
 dag_tmdb()
