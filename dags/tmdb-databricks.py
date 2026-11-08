@@ -1,7 +1,7 @@
 from airflow.decorators import task,dag
 from airflow.operators.python import PythonOperator
 from airflow.utils.task_group import TaskGroup
-from airflow.utils.trigger_rule import Trigger_Rule
+from airflow.utils.trigger_rule import TriggerRule
 from airflow.models import Variable
 import requests
 import pandas as pd
@@ -26,7 +26,7 @@ def dag_tmdb():
             }
 
             response = requests.get(url,headers=header)
-            
+
             return response
         
         authentication_TMDB()
