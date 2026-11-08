@@ -27,7 +27,7 @@ def dag_tmdb():
 
             response = requests.get(url,headers=header)
 
-            return response
+            return response.status_code
         
         authentication_TMDB()
 dag_tmdb()
