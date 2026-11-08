@@ -17,12 +17,17 @@ import pendulum
 
 def dag_tmdb():
     with TaskGroup('Authentification') as authetification:
+        @task
         def authentication_TMDB():
             url = Variable.get('url-authetication')
             token = Variable.get('token')
             header = {
                 'Authorization' : token
             }
+
             response = requests.get(url,headers=header)
+            
             return response
+        
+        authentication_TMDB()
 dag_tmdb()
