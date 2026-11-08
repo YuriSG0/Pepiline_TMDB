@@ -32,7 +32,7 @@ def dag_tmdb():
         auth = authentication_TMDB()
 
     with TaskGroup('Get-Data-Film') as get_information:
-        @task(TriggerRule=TriggerRule.ONE_SUCCESS)
+        @task(trigger_rule=TriggerRule.ONE_SUCCESS)
         def requests_genres():
             url = Variable.get('url-genres')
             token = Variable.get('token')
