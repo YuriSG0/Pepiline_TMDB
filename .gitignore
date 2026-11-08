@@ -219,5 +219,10 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# Config
+/config
+
+
+
 # # docker-compose Airflow
 # docker-compose.yaml
